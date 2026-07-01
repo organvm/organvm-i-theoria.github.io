@@ -3,208 +3,583 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORGAN-I: Theoria — Theory &amp; Epistemology</title>
-    <meta name="description" content="ORGAN-I: Theoria — Theory &amp; Epistemology — part of the ORGANVM eight-organ system">
+    <title>ORGAN-I: Theoria &mdash; Theory &amp; Epistemology</title>
+    <meta name="description" content="ORGAN-I: Theoria &mdash; public activation index for the ORGANVM theory and epistemology organ">
     <style>
-        :root { --primary: #311b92; --bg: #f6f8fa; --text: #24292e; --border: #e1e4e8; --sidebar-bg: #ffffff; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: var(--text); margin: 0; display: flex; min-height: 100vh; background: var(--bg); }
-        nav { width: 280px; background: var(--sidebar-bg); border-right: 1px solid var(--border); padding: 2rem 1.5rem; flex-shrink: 0; position: sticky; top: 0; height: 100vh; box-sizing: border-box; overflow-y: auto; }
-        nav h2 { font-size: 0.7rem; color: #6a737d; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 1rem; }
-        nav h3 { font-size: 0.65rem; color: #6a737d; text-transform: uppercase; letter-spacing: 1px; margin: 1.5rem 0 0.75rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+        :root {
+            --primary: #311b92;
+            --primary-soft: #f4f0ff;
+            --bg: #f6f8fa;
+            --text: #24292e;
+            --muted: #586069;
+            --border: #d8dee4;
+            --panel: #ffffff;
+            --pass: #116329;
+            --pass-bg: #dafbe1;
+            --warn: #9a6700;
+            --warn-bg: #fff8c5;
+            --archive: #57606a;
+            --archive-bg: #f6f8fa;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
+            background: var(--bg);
+        }
+
+        nav {
+            width: 280px;
+            background: var(--panel);
+            border-right: 1px solid var(--border);
+            padding: 2rem 1.5rem;
+            flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        nav h2,
+        nav h3 {
+            font-size: 0.68rem;
+            color: #6a737d;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin: 0 0 1rem;
+        }
+
+        nav h3 {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
         nav ul { list-style: none; padding: 0; margin: 0; }
         nav li { margin-bottom: 0.35rem; }
-        nav a { text-decoration: none; color: #586069; font-size: 0.85rem; padding: 0.4rem 0.75rem; border-radius: 6px; display: block; transition: all 0.2s; }
-        nav a:hover { background: #f1f8ff; color: var(--primary); }
-        nav a.active { background: #f1f8ff; color: var(--primary); font-weight: 600; border-left: 3px solid var(--primary); border-radius: 0 6px 6px 0; }
-        nav a.hub-link { color: var(--primary); font-weight: 500; }
-        .hub-arrow { font-size: 0.75em; opacity: 0.5; }
-        main { flex-grow: 1; padding: 3rem 4rem; max-width: 1200px; }
-        header { margin-bottom: 3rem; }
+
+        nav a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 0.85rem;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            display: block;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: var(--primary-soft);
+            color: var(--primary);
+        }
+
+        nav a.active {
+            font-weight: 650;
+            border-left: 3px solid var(--primary);
+            border-radius: 0 6px 6px 0;
+        }
+
+        nav a.hub-link { color: var(--primary); font-weight: 550; }
+        .hub-arrow { font-size: 0.75em; opacity: 0.6; }
+
+        main {
+            flex-grow: 1;
+            padding: 3rem 4rem 4rem;
+            max-width: 1280px;
+        }
+
+        header { margin-bottom: 2rem; }
         header h1 { font-size: 2rem; font-weight: 800; margin: 0; color: #000; }
-        header p { color: #6a737d; font-size: 1.05rem; margin-top: 0.5rem; }
-        .hub-banner { background: #f1f8ff; border: 1px solid #c8e1ff; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 2rem; font-size: 0.9rem; color: #586069; }
-        .hub-banner a { color: var(--primary); font-weight: 600; text-decoration: none; }
+        header p { color: var(--muted); font-size: 1.05rem; margin: 0.5rem 0 0; max-width: 760px; }
+
+        a { color: var(--primary); }
+
+        .hub-banner,
+        .audit-panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .hub-banner {
+            padding: 1rem 1.25rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        .hub-banner a { font-weight: 650; text-decoration: none; }
         .hub-banner a:hover { text-decoration: underline; }
-        .repo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
-        .repo-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); display: flex; flex-direction: column; text-decoration: none; color: inherit; }
-        .repo-card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
-        .repo-name { color: var(--primary); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; word-break: break-word; }
-        .repo-desc { font-size: 0.9rem; color: #586069; line-height: 1.5; margin-bottom: 1rem; flex-grow: 1; }
-        .repo-footer { display: flex; align-items: center; gap: 0.5rem; }
-        .tag { font-size: 0.65rem; background: #eff7ff; color: var(--primary); padding: 3px 8px; border-radius: 20px; font-weight: 600; text-transform: uppercase; border: 1px solid #c8e1ff; }
-        .tag.featured { background: #fff8e1; color: #f57f17; border-color: #ffe082; }
-        .count { font-size: 0.85rem; color: #6a737d; margin-bottom: 2rem; }
-        @media (max-width: 900px) { body { flex-direction: column; } nav { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid var(--border); } main { padding: 2rem 1.5rem; } }
+
+        .audit-panel {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1px;
+            overflow: hidden;
+            margin-bottom: 1.25rem;
+            background: var(--border);
+        }
+
+        .metric {
+            background: var(--panel);
+            padding: 1rem 1.1rem;
+            min-height: 92px;
+        }
+
+        .metric-label {
+            color: #6a737d;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .metric-value {
+            color: #000;
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-top: 0.25rem;
+        }
+
+        .metric-note {
+            color: var(--muted);
+            font-size: 0.82rem;
+            margin-top: 0.2rem;
+        }
+
+        .count {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin: 0 0 1.4rem;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 2rem 0 1rem;
+        }
+
+        .section-heading h2 {
+            font-size: 1rem;
+            margin: 0;
+            color: #000;
+        }
+
+        .section-heading p {
+            font-size: 0.82rem;
+            color: var(--muted);
+            margin: 0;
+        }
+
+        .repo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .repo-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.15rem;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            min-height: 210px;
+        }
+
+        .repo-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+
+        .repo-name {
+            color: var(--primary);
+            font-size: 1rem;
+            font-weight: 750;
+            margin-bottom: 0.45rem;
+            overflow-wrap: anywhere;
+        }
+
+        .repo-desc {
+            font-size: 0.88rem;
+            color: var(--muted);
+            line-height: 1.45;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .repo-footer {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.65rem;
+            background: #eff7ff;
+            color: var(--primary);
+            padding: 3px 8px;
+            border-radius: 999px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: 1px solid #c8e1ff;
+        }
+
+        .tag.pass { background: var(--pass-bg); color: var(--pass); border-color: #aceebb; }
+        .tag.warn { background: var(--warn-bg); color: var(--warn); border-color: #f0d98c; }
+        .tag.archive { background: var(--archive-bg); color: var(--archive); border-color: var(--border); }
+
+        .audit-note {
+            margin-top: 1.75rem;
+            color: var(--muted);
+            font-size: 0.84rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        @media (max-width: 980px) {
+            body { flex-direction: column; }
+            nav {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+            main { padding: 2rem 1.25rem; }
+            .audit-panel { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (max-width: 620px) {
+            .audit-panel { grid-template-columns: 1fr; }
+            .section-heading { display: block; }
+            .section-heading p { margin-top: 0.25rem; }
+        }
     </style>
 </head>
 <body>
     <nav>
         <h2>ORGANVM Ecosystem</h2>
         <ul>
-            <li><a href="https://organvm-i-theoria.github.io/" class="active">I · Theoria</a></li>
-            <li><a href="https://organvm-ii-poiesis.github.io/">II · Poiesis</a></li>
-            <li><a href="https://organvm-iii-ergon.github.io/">III · Ergon</a></li>
-            <li><a href="https://organvm-iv-taxis.github.io/">IV · Taxis</a></li>
-            <li><a href="https://organvm-v-logos.github.io/">V · Logos</a></li>
-            <li><a href="https://organvm-vi-koinonia.github.io/">VI · Koinonia</a></li>
-            <li><a href="https://organvm-vii-kerygma.github.io/">VII · Kerygma</a></li>
+            <li><a href="https://organvm-i-theoria.github.io/" class="active">I &middot; Theoria</a></li>
+            <li><a href="https://organvm-ii-poiesis.github.io/">II &middot; Poiesis</a></li>
+            <li><a href="https://organvm-iii-ergon.github.io/">III &middot; Ergon</a></li>
+            <li><a href="https://organvm-iv-taxis.github.io/">IV &middot; Taxis</a></li>
+            <li><a href="https://organvm-v-logos.github.io/">V &middot; Logos</a></li>
+            <li><a href="https://organvm-vi-koinonia.github.io/">VI &middot; Koinonia</a></li>
+            <li><a href="https://organvm-vii-kerygma.github.io/">VII &middot; Kerygma</a></li>
             <li><a href="https://meta-organvm.github.io/">Meta</a></li>
         </ul>
         <h3>Hub</h3>
         <ul>
-            <li><a href="https://4444j99.github.io/portfolio/" class="hub-link">Portfolio <span class="hub-arrow">↗</span></a></li>
-            <li><a href="https://4444j99.github.io/portfolio/directory/" class="hub-link">System Directory <span class="hub-arrow">↗</span></a></li>
-            <li><a href="https://organvm-i-theoria.github.io/my-knowledge-base/" class="hub-link">Knowledge Base <span class="hub-arrow">↗</span></a></li>
-            <li><a href="https://organvm-v-logos.github.io/public-process/" class="hub-link">Essays <span class="hub-arrow">↗</span></a></li>
+            <li><a href="https://4444j99.github.io/portfolio/" class="hub-link">Portfolio <span class="hub-arrow">-&gt;</span></a></li>
+            <li><a href="https://4444j99.github.io/portfolio/directory/" class="hub-link">System Directory <span class="hub-arrow">-&gt;</span></a></li>
+            <li><a href="https://organvm-i-theoria.github.io/my-knowledge-base/" class="hub-link">Knowledge Base <span class="hub-arrow">-&gt;</span></a></li>
+            <li><a href="https://organvm-v-logos.github.io/public-process/" class="hub-link">Essays <span class="hub-arrow">-&gt;</span></a></li>
         </ul>
     </nav>
+
     <main>
         <header>
-            <h1>ORGAN-I: Theoria — Theory &amp; Epistemology</h1>
-            <p>Part of the <a href="https://4444j99.github.io/portfolio/directory/" style="color:var(--primary);text-decoration:none;font-weight:600">ORGANVM eight-organ system</a></p>
+            <h1>ORGAN-I: Theoria &mdash; Theory &amp; Epistemology</h1>
+            <p>Public front door for the Theoria boundary: theory, recursive systems, epistemic infrastructure, and activation-audit routing across the ORGANVM eight-organ system.</p>
         </header>
+
         <div class="hub-banner">
-            Explore the full system: <a href="https://4444j99.github.io/portfolio/">Portfolio</a> · <a href="https://4444j99.github.io/portfolio/directory/">Directory</a> · <a href="https://organvm-v-logos.github.io/public-process/">49 Essays</a>
+            Explore the full system:
+            <a href="https://4444j99.github.io/portfolio/">Portfolio</a> &middot;
+            <a href="https://4444j99.github.io/portfolio/directory/">Directory</a> &middot;
+            <a href="https://organvm-v-logos.github.io/public-process/">49 Essays</a>
         </div>
-        <p class="count">19 repositories with GitHub Pages</p>
+
+        <section class="audit-panel" aria-label="Activation audit summary">
+            <div class="metric">
+                <div class="metric-label">Root activation</div>
+                <div class="metric-value">ship-now</div>
+                <div class="metric-note">HTTP 200, 2417 bytes</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Active boundary</div>
+                <div class="metric-value">23 repos</div>
+                <div class="metric-note">Indexed from public org evidence</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Front-door links</div>
+                <div class="metric-value">Pages + repo</div>
+                <div class="metric-note">Pages where published, GitHub fallback otherwise</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Archives retained</div>
+                <div class="metric-value">3 repos</div>
+                <div class="metric-note">Visible below, outside active count</div>
+            </div>
+        </section>
+
+        <p class="count">Activation Audit Track B: ORGAN-I root page is live and this front door indexes the 23 active/public Theoria repositories with their current navigation state.</p>
+
+        <div class="section-heading">
+            <h2>Active Activation Boundary</h2>
+            <p>23 repositories</p>
+        </div>
+
         <div class="repo-grid">
-        <a href="https://organvm-i-theoria.github.io/4-ivi374-F0Rivi4/" class="repo-card" target="_blank" rel="noopener">
-            <div class="repo-name">4-ivi374-F0Rivi4</div>
-            <div class="repo-desc">No description</div>
-            <div class="repo-footer">
-                <span class="tag">GitHub Pages</span>
-                
-            </div>
-        </a>
-        <a href="https://organvm-i-theoria.github.io/a-recursive-root/" class="repo-card" target="_blank" rel="noopener">
-            <div class="repo-name">a-recursive-root</div>
-            <div class="repo-desc">No description</div>
-            <div class="repo-footer">
-                <span class="tag">GitHub Pages</span>
-                
-            </div>
-        </a>
-        <a href="https://organvm-i-theoria.github.io/auto-revision-epistemic-engine/" class="repo-card" target="_blank" rel="noopener">
-            <div class="repo-name">auto-revision-epistemic-engine</div>
-            <div class="repo-desc">No description</div>
-            <div class="repo-footer">
-                <span class="tag">GitHub Pages</span>
-                
-            </div>
-        </a>
-        <a href="https://organvm-i-theoria.github.io/call-function--ontological/" class="repo-card" target="_blank" rel="noopener">
-            <div class="repo-name">call-function--ontological</div>
-            <div class="repo-desc">No description</div>
-            <div class="repo-footer">
-                <span class="tag">GitHub Pages</span>
-                
-            </div>
-        </a>
-        <a href="https://organvm-i-theoria.github.io/cog-init-1-0-/" class="repo-card" target="_blank" rel="noopener">
-            <div class="repo-name">cog-init-1-0-</div>
-            <div class="repo-desc">No description</div>
-            <div class="repo-footer">
-                <span class="tag">GitHub Pages</span>
-                
-            </div>
-        </a>
-        <a href="https://organvm-i-theoria.github.io/cognitive-archaelogy-tribunal/" class="repo-card" target="_blank" rel="noopener">
-            <div class="repo-name">cognitive-archaelogy-tribunal</div>
-            <div class="repo-desc">No description</div>
-            <div class="repo-footer">
-                <span class="tag">GitHub Pages</span>
-                
-            </div>
-        </a>
-        <a href="https://organvm-i-theoria.github.io/linguistic-atomization-framework/" class="repo-card" target="_blank" rel="noopener">
-            <div class="repo-name">linguistic-atomization-framework</div>
-            <div class="repo-desc">No description</div>
-            <div class="repo-footer">
-                <span class="tag">GitHub Pages</span>
-                
-            </div>
-        </a>
-        <a href="https://organvm-i-theoria.github.io/meta-source--ledger-output/" class="repo-card" target="_blank" rel="noopener">
-            <div class="repo-name">meta-source--ledger-output</div>
-            <div class="repo-desc">No description</div>
-            <div class="repo-footer">
-                <span class="tag">GitHub Pages</span>
-                
-            </div>
-        </a>
-        <a href="https://organvm-i-theoria.github.io/my-knowledge-base/" class="repo-card" target="_blank" rel="noopener">
-            <div class="repo-name">my-knowledge-base</div>
-            <div class="repo-desc">No description</div>
-            <div class="repo-footer">
-                <span class="tag">GitHub Pages</span>
-                <span class="tag featured">Featured</span>
-            </div>
-        </a>
-        <a href="https://organvm-i-theoria.github.io/narratological-algorithmic-lenses/" class="repo-card" target="_blank" rel="noopener">
-            <div class="repo-name">narratological-algorithmic-lenses</div>
-            <div class="repo-desc">No description</div>
-            <div class="repo-footer">
-                <span class="tag">GitHub Pages</span>
-                
-            </div>
-        </a>
-        <a href="https://organvm-i-theoria.github.io/nexus--babel-alexandria/" class="repo-card" target="_blank" rel="noopener">
-            <div class="repo-name">nexus--babel-alexandria</div>
-            <div class="repo-desc">No description</div>
-            <div class="repo-footer">
-                <span class="tag">GitHub Pages</span>
-                
-            </div>
-        </a>
-        <a href="https://organvm-i-theoria.github.io/organon-noumenon--ontogenetic-morphe/" class="repo-card" target="_blank" rel="noopener">
-            <div class="repo-name">organon-noumenon--ontogenetic-morphe</div>
-            <div class="repo-desc">No description</div>
-            <div class="repo-footer">
-                <span class="tag">GitHub Pages</span>
-                
-            </div>
-        </a>
-        <a href="https://organvm-i-theoria.github.io/recursive-engine--generative-entity/" class="repo-card" target="_blank" rel="noopener">
-            <div class="repo-name">recursive-engine--generative-entity</div>
-            <div class="repo-desc">No description</div>
-            <div class="repo-footer">
-                <span class="tag">GitHub Pages</span>
-                
-            </div>
-        </a>
-        <a href="https://organvm-i-theoria.github.io/reverse-engine-recursive-run/" class="repo-card" target="_blank" rel="noopener">
-            <div class="repo-name">reverse-engine-recursive-run</div>
-            <div class="repo-desc">No description</div>
-            <div class="repo-footer">
-                <span class="tag">GitHub Pages</span>
-                
-            </div>
-        </a>
-        <a href="https://organvm-i-theoria.github.io/scalable-lore-expert/" class="repo-card" target="_blank" rel="noopener">
-            <div class="repo-name">scalable-lore-expert</div>
-            <div class="repo-desc">No description</div>
-            <div class="repo-footer">
-                <span class="tag">GitHub Pages</span>
-                
-            </div>
-        </a>
-        <a href="https://organvm-i-theoria.github.io/sema-metra--alchemica-mundi/" class="repo-card" target="_blank" rel="noopener">
-            <div class="repo-name">sema-metra--alchemica-mundi</div>
-            <div class="repo-desc">No description</div>
-            <div class="repo-footer">
-                <span class="tag">GitHub Pages</span>
-                
-            </div>
-        </a>
-        <a href="https://organvm-i-theoria.github.io/system-governance-framework/" class="repo-card" target="_blank" rel="noopener">
-            <div class="repo-name">system-governance-framework</div>
-            <div class="repo-desc">No description</div>
-            <div class="repo-footer">
-                <span class="tag">GitHub Pages</span>
-                
-            </div>
-        </a>
+            <a href="https://organvm-i-theoria.github.io/" class="repo-card" target="_blank" rel="noopener" data-audit-state="ship-now">
+                <div class="repo-name">organvm-i-theoria.github.io</div>
+                <div class="repo-desc">Root landing page for ORGAN-I. Activation audit receipt: live URL returned HTTP 200 and is ready to ship.</div>
+                <div class="repo-footer">
+                    <span class="tag pass">ship-now</span>
+                    <span class="tag">GitHub Pages</span>
+                </div>
+            </a>
+
+            <a href="https://github.com/organvm-i-theoria/hierarchia-mundi" class="repo-card" target="_blank" rel="noopener" data-audit-state="ship-now">
+                <div class="repo-name">hierarchia-mundi</div>
+                <div class="repo-desc">The structure of reality modeled as a Unix filesystem, with installable package, tests, and CLI smoke path recorded as ship-now.</div>
+                <div class="repo-footer">
+                    <span class="tag pass">ship-now</span>
+                    <span class="tag">Repository</span>
+                </div>
+            </a>
+
+            <a href="https://organvm-i-theoria.github.io/my-knowledge-base/" class="repo-card" target="_blank" rel="noopener" data-audit-state="pages-live">
+                <div class="repo-name">my-knowledge-base</div>
+                <div class="repo-desc">Knowledge atomization system for AI conversation exports, semantic units, vector search, and intelligence extraction.</div>
+                <div class="repo-footer">
+                    <span class="tag">GitHub Pages</span>
+                    <span class="tag">featured</span>
+                </div>
+            </a>
+
+            <a href="https://organvm-i-theoria.github.io/a-recursive-root/" class="repo-card" target="_blank" rel="noopener" data-audit-state="pages-live">
+                <div class="repo-name">a-recursive-root</div>
+                <div class="repo-desc">AI Council and recursive-root foundations for multi-agent debate, archetypal reasoning, and structured deliberation.</div>
+                <div class="repo-footer">
+                    <span class="tag">GitHub Pages</span>
+                    <span class="tag">public</span>
+                </div>
+            </a>
+
+            <a href="https://organvm-i-theoria.github.io/system-governance-framework/" class="repo-card" target="_blank" rel="noopener" data-audit-state="pages-live">
+                <div class="repo-name">system-governance-framework</div>
+                <div class="repo-desc">Multi-organ governance rules, promotion criteria, and orchestration frameworks for autonomous systems.</div>
+                <div class="repo-footer">
+                    <span class="tag">GitHub Pages</span>
+                    <span class="tag">public</span>
+                </div>
+            </a>
+
+            <a href="https://organvm-i-theoria.github.io/sema-metra--alchemica-mundi/" class="repo-card" target="_blank" rel="noopener" data-audit-state="pages-live">
+                <div class="repo-name">sema-metra--alchemica-mundi</div>
+                <div class="repo-desc">Signal-Matrix for World-Alchemy: symbolic signal processing through alchemical transformation engines.</div>
+                <div class="repo-footer">
+                    <span class="tag">GitHub Pages</span>
+                    <span class="tag">public</span>
+                </div>
+            </a>
+
+            <a href="https://organvm-i-theoria.github.io/scalable-lore-expert/" class="repo-card" target="_blank" rel="noopener" data-audit-state="pages-live">
+                <div class="repo-name">scalable-lore-expert</div>
+                <div class="repo-desc">Ontological knowledge management applying Dante's epistemological framework to narrative-universe modeling.</div>
+                <div class="repo-footer">
+                    <span class="tag">GitHub Pages</span>
+                    <span class="tag">public</span>
+                </div>
+            </a>
+
+            <a href="https://organvm-i-theoria.github.io/reverse-engine-recursive-run/" class="repo-card" target="_blank" rel="noopener" data-audit-state="pages-live">
+                <div class="repo-name">reverse-engine-recursive-run</div>
+                <div class="repo-desc">Architecture governance toolkit for risk scoring, drift detection, ownership analysis, and SBOM generation.</div>
+                <div class="repo-footer">
+                    <span class="tag">GitHub Pages</span>
+                    <span class="tag">public</span>
+                </div>
+            </a>
+
+            <a href="https://github.com/organvm-i-theoria/radix-recursiva-solve-coagula-redi" class="repo-card" target="_blank" rel="noopener" data-audit-state="repo-indexed">
+                <div class="repo-name">radix-recursiva-solve-coagula-redi</div>
+                <div class="repo-desc">RE:GE:OS recursive generative operating system with Python sandbox and Obsidian-vault structure.</div>
+                <div class="repo-footer">
+                    <span class="tag">Repository</span>
+                    <span class="tag warn">Pages unknown</span>
+                </div>
+            </a>
+
+            <a href="https://organvm-i-theoria.github.io/organon-noumenon--ontogenetic-morphe/" class="repo-card" target="_blank" rel="noopener" data-audit-state="pages-live">
+                <div class="repo-name">organon-noumenon--ontogenetic-morphe</div>
+                <div class="repo-desc">Ontogenetic Morphe: symbolic processing architecture with recursive loops, async message bus, and typed values.</div>
+                <div class="repo-footer">
+                    <span class="tag">GitHub Pages</span>
+                    <span class="tag">public</span>
+                </div>
+            </a>
+
+            <a href="https://organvm-i-theoria.github.io/linguistic-atomization-framework/" class="repo-card" target="_blank" rel="noopener" data-audit-state="pages-live">
+                <div class="repo-name">linguistic-atomization-framework</div>
+                <div class="repo-desc">LingFrame computational rhetoric: hierarchical text atomization, analysis modules, corpus work, and visualizations.</div>
+                <div class="repo-footer">
+                    <span class="tag">GitHub Pages</span>
+                    <span class="tag">public</span>
+                </div>
+            </a>
+
+            <a href="https://organvm-i-theoria.github.io/cognitive-archaelogy-tribunal/" class="repo-card" target="_blank" rel="noopener" data-audit-state="pages-live">
+                <div class="repo-name">cognitive-archaelogy-tribunal</div>
+                <div class="repo-desc">Archaeological audit tool for cognitive systems, archive inventories, conversations, and knowledge graphs.</div>
+                <div class="repo-footer">
+                    <span class="tag">GitHub Pages</span>
+                    <span class="tag">public</span>
+                </div>
+            </a>
+
+            <a href="https://organvm-i-theoria.github.io/recursive-engine--generative-entity/" class="repo-card" target="_blank" rel="noopener" data-audit-state="pages-live">
+                <div class="repo-name">recursive-engine--generative-entity</div>
+                <div class="repo-desc">RE:GE symbolic operating system for myth, identity, ritual, and recursive generative entities.</div>
+                <div class="repo-footer">
+                    <span class="tag">GitHub Pages</span>
+                    <span class="tag">flagship</span>
+                </div>
+            </a>
+
+            <a href="https://organvm-i-theoria.github.io/nexus--babel-alexandria/" class="repo-card" target="_blank" rel="noopener" data-audit-state="pages-live">
+                <div class="repo-name">nexus--babel-alexandria</div>
+                <div class="repo-desc">Theoria Linguae Machina: rhetorical-linguistic operating system grounded in category theory and semiotics.</div>
+                <div class="repo-footer">
+                    <span class="tag">GitHub Pages</span>
+                    <span class="tag">public</span>
+                </div>
+            </a>
+
+            <a href="https://github.com/organvm-i-theoria/.github" class="repo-card" target="_blank" rel="noopener" data-audit-state="repo-indexed">
+                <div class="repo-name">.github</div>
+                <div class="repo-desc">Organization-wide CI/CD, AI agents, issue templates, governance files, and community health defaults.</div>
+                <div class="repo-footer">
+                    <span class="tag">Repository</span>
+                    <span class="tag">template</span>
+                </div>
+            </a>
+
+            <a href="https://organvm-i-theoria.github.io/call-function--ontological/" class="repo-card" target="_blank" rel="noopener" data-audit-state="pages-live">
+                <div class="repo-name">call-function--ontological</div>
+                <div class="repo-desc">FUNCTIONcalled(): ontological naming and metadata convention for self-documenting files and grounded tool use.</div>
+                <div class="repo-footer">
+                    <span class="tag">GitHub Pages</span>
+                    <span class="tag">public</span>
+                </div>
+            </a>
+
+            <a href="https://organvm-i-theoria.github.io/narratological-algorithmic-lenses/" class="repo-card" target="_blank" rel="noopener" data-audit-state="pages-live">
+                <div class="repo-name">narratological-algorithmic-lenses</div>
+                <div class="repo-desc">Narratological studies and algorithms formalizing narrative principles from Aristotle to Pixar as executable code.</div>
+                <div class="repo-footer">
+                    <span class="tag">GitHub Pages</span>
+                    <span class="tag">public</span>
+                </div>
+            </a>
+
+            <a href="https://organvm-i-theoria.github.io/meta-source--ledger-output/" class="repo-card" target="_blank" rel="noopener" data-audit-state="pages-live">
+                <div class="repo-name">meta-source--ledger-output</div>
+                <div class="repo-desc">Systems and core specifications for the organvm-i-theoria ecosystem and its source-to-ledger outputs.</div>
+                <div class="repo-footer">
+                    <span class="tag">GitHub Pages</span>
+                    <span class="tag">public</span>
+                </div>
+            </a>
+
+            <a href="https://organvm-i-theoria.github.io/auto-revision-epistemic-engine/" class="repo-card" target="_blank" rel="noopener" data-audit-state="pages-live">
+                <div class="repo-name">auto-revision-epistemic-engine</div>
+                <div class="repo-desc">Self-governing orchestration framework with phased review gates, RBAC, and append-only audit chains.</div>
+                <div class="repo-footer">
+                    <span class="tag">GitHub Pages</span>
+                    <span class="tag">public</span>
+                </div>
+            </a>
+
+            <a href="https://github.com/organvm-i-theoria/conversation-corpus-engine" class="repo-card" target="_blank" rel="noopener" data-audit-state="repo-indexed">
+                <div class="repo-name">conversation-corpus-engine</div>
+                <div class="repo-desc">Canonical corpus and federation engine for multi-provider AI conversation memory.</div>
+                <div class="repo-footer">
+                    <span class="tag">Repository</span>
+                    <span class="tag">public</span>
+                </div>
+            </a>
+
+            <a href="https://github.com/organvm-i-theoria/rules-system-bound" class="repo-card" target="_blank" rel="noopener" data-audit-state="repo-indexed">
+                <div class="repo-name">rules-system-bound</div>
+                <div class="repo-desc">Foundational rule systems and constraint architectures for ORGAN-I theoretical governance.</div>
+                <div class="repo-footer">
+                    <span class="tag">Repository</span>
+                    <span class="tag">public</span>
+                </div>
+            </a>
+
+            <a href="https://github.com/organvm-i-theoria/vigiles-aeternae--corpus-mythicum" class="repo-card" target="_blank" rel="noopener" data-audit-state="repo-indexed">
+                <div class="repo-name">vigiles-aeternae--corpus-mythicum</div>
+                <div class="repo-desc">The Library of All Libraries: mythological research corpus for the Vigiles system.</div>
+                <div class="repo-footer">
+                    <span class="tag">Repository</span>
+                    <span class="tag">public</span>
+                </div>
+            </a>
+
+            <a href="https://github.com/organvm-i-theoria/styx-behavioral-economics-theory" class="repo-card" target="_blank" rel="noopener" data-audit-state="repo-indexed">
+                <div class="repo-name">styx-behavioral-economics-theory</div>
+                <div class="repo-desc">Behavioral economics theory for peer-audited accountability, loss aversion, prospect theory, and game-theoretic proofs.</div>
+                <div class="repo-footer">
+                    <span class="tag">Repository</span>
+                    <span class="tag">public</span>
+                </div>
+            </a>
         </div>
+
+        <div class="section-heading">
+            <h2>Archived / Retained</h2>
+            <p>3 repositories</p>
+        </div>
+
+        <div class="repo-grid">
+            <a href="https://github.com/organvm-i-theoria/collective-persona-operations" class="repo-card" target="_blank" rel="noopener" data-audit-state="archived">
+                <div class="repo-name">collective-persona-operations</div>
+                <div class="repo-desc">Archived multi-agent system for collective identity and persona management.</div>
+                <div class="repo-footer">
+                    <span class="tag archive">archive</span>
+                    <span class="tag">Repository</span>
+                </div>
+            </a>
+
+            <a href="https://organvm-i-theoria.github.io/cog-init-1-0-/" class="repo-card" target="_blank" rel="noopener" data-audit-state="archived">
+                <div class="repo-name">cog-init-1-0-</div>
+                <div class="repo-desc">Archived foundational cognitive-system seed artifact retained for historical continuity.</div>
+                <div class="repo-footer">
+                    <span class="tag archive">archive</span>
+                    <span class="tag">GitHub Pages</span>
+                </div>
+            </a>
+
+            <a href="https://organvm-i-theoria.github.io/4-ivi374-F0Rivi4/" class="repo-card" target="_blank" rel="noopener" data-audit-state="archived">
+                <div class="repo-name">4-ivi374-F0Rivi4</div>
+                <div class="repo-desc">Archived OS Ecosystem Cartridge: meta-framework for holistic software ecosystem architecture.</div>
+                <div class="repo-footer">
+                    <span class="tag archive">archive</span>
+                    <span class="tag">GitHub Pages</span>
+                </div>
+            </a>
+        </div>
+
+        <p class="audit-note">
+            Evidence basis: the root activation receipt supplied by issue #1, the public GitHub organization repository listing, and the current live/known GitHub Pages paths. Repositories without a proven Pages path route to GitHub so the boundary remains navigable without overstating deployment state.
+        </p>
     </main>
 </body>
 </html>
